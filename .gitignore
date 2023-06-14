@@ -1,3 +1,4 @@
 /model_outs/bert/
 /model_outs/bilstm/
 /.idea
+/prev_trained_model/bert-base-chinese/
