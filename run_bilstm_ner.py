@@ -18,7 +18,6 @@ def lstm_train():
     train_word_lists, train_tag_lists = prepocess_data_for_lstmcrf(
         train_word_lists, train_tag_lists
     )
-    print(train_word_lists[0])
     dev_word_lists, dev_tag_lists = prepocess_data_for_lstmcrf(
         dev_word_lists, dev_tag_lists
     )
@@ -36,11 +35,6 @@ def lstm_train():
 def main():
     """训练模型，评估结果"""
     lstm_train()
-
-    # ensemble_evaluate(
-    #     [lstmcrf_pred],
-    #     test_tag_lists
-    # )
 
 
 if __name__ == "__main__":

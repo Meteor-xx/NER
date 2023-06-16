@@ -27,7 +27,7 @@ from metrics.ner_metrics import SeqEntityScore
 from tools.finetuning_argparse import get_argparse
 
 MODEL_CLASSES = {
-    ## bert ernie bert_wwm bert_wwwm_ext
+    # bert ernie bert_wwm bert_wwwm_ext
     'bert': (BertConfig, BertSoftmaxForNer, BertTokenizer),
 }
 
@@ -178,6 +178,7 @@ def train(args, train_dataset, model, tokenizer):
             torch.cuda.empty_cache()
     return global_step, tr_loss / global_step
 
+
 def evaluate(args, model, tokenizer, prefix=""):
     metric = SeqEntityScore(args.id2label,markup=args.markup)
     eval_output_dir = args.output_dir
@@ -284,6 +285,7 @@ def predict(args, model, tokenizer, prefix=""):
         for record in results:
             writer.write(json.dumps(record) + '\n')
 
+
 def load_and_cache_examples(args, task, tokenizer, data_type='train'):
     if args.local_rank not in [-1, 0] and not evaluate:
         torch.distributed.barrier()  # Make sure only the first process in distributed training process the dataset, and the others will use the cache
@@ -333,6 +335,7 @@ def load_and_cache_examples(args, task, tokenizer, data_type='train'):
     all_lens = torch.tensor([f.input_len for f in features], dtype=torch.long)
     dataset = TensorDataset(all_input_ids, all_input_mask, all_segment_ids, all_lens,all_label_ids)
     return dataset
+
 
 def main():
     args = get_argparse().parse_args()
