@@ -3,6 +3,7 @@ import openai
 import time
 
 from utils.data import build_corpus
+from utils.evaluating import Metrics
 
 openai.api_key = "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"
 
@@ -51,6 +52,9 @@ def main():
     for l in d:
         tag_list = eval(json.loads(d[0])["dialog"])
         test_prev_tag_lists.append(tag_list)
+    metrics = Metrics(test_tag_lists, test_prev_tag_lists, remove_O=False)
+    metrics.report_scores()
+    metrics.report_confusion_matrix()
 
 
 if __name__ == "__main__":

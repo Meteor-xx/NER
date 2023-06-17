@@ -37,6 +37,9 @@ class Metrics(object):
             print(tag)
             print(self.correct_tags_number.get(tag, 0))
             print(self.predict_tags_counter[tag])
+            if self.predict_tags_counter[tag] == 0:
+                precision_scores[tag] = 0
+                continue
             precision_scores[tag] = self.correct_tags_number.get(tag, 0) / \
                 self.predict_tags_counter[tag]
 
